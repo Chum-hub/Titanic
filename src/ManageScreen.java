@@ -19,50 +19,12 @@ public class ManageScreen extends JPanel {
             this.survivedComboBox.setBounds(survivedLabel.getX() + survivedLabel.getWidth() + 1, survivedLabel.getY(), Constants.COMBO_BOX_WIDTH, Constants.COMBO_BOX_HEIGHT);
             this.add(this.survivedComboBox);
 
+
             this.survivedComboBox.addActionListener((e) -> {
                 int selected = survivedComboBox.getSelectedIndex();
-                getPClassSurvive(selected);
+                Constants.pClass = "" + selected;
             });
             survivedComboBox.revalidate();
         }
-    }
-    public void getPClassSurvive(int index) {
-        int survived = 0;
-        int notSurvived = 0;
-        for (Passenger pas : Constants.passengers) {
-            switch (index) {
-                case 0:
-                    if (pas.getSurvive().equals("1")) {
-                        survived++;
-                    } else {
-                        notSurvived++;
-                    }
-                    break;
-                case 1:
-                    if (pas.getSurvive().equals("1") && pas.getpClass().equals("1")) {
-                        survived++;
-                    } else if(pas.getSurvive().equals("0") && pas.getpClass().equals("1")){
-                        notSurvived++;
-                    }
-                    break;
-
-                case 2:
-                    if (pas.getSurvive().equals("1") && pas.getpClass().equals("2")) {
-                        survived++;
-                    } else if(pas.getSurvive().equals("0") && pas.getpClass().equals("2")){
-                        notSurvived++;
-                    }
-                    break;
-
-                case 3:
-                    if (pas.getSurvive().equals("1") && pas.getpClass().equals("3")) {
-                        survived++;
-                    } else if(pas.getSurvive().equals("0") && pas.getpClass().equals("3")){
-                        notSurvived++;
-                    }
-                    break;
-            }
-        }
-        System.out.println("total: " + (survived + notSurvived) + " (survived: " + survived + ", not survived: " + notSurvived + ")");
     }
 }

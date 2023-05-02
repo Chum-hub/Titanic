@@ -21,40 +21,8 @@ public class ManageScreenGender extends JPanel {
 
             this.survivedSex.addActionListener((e) -> {
                 int selected = survivedSex.getSelectedIndex();
-                getGenderSurvive(selected);
+                Constants.sex = "" + selected;
             });
         }
-    }
-
-    public void getGenderSurvive(int index){
-        int survived = 0;
-        int notSurvived = 0;
-        for (Passenger pas : Constants.passengers) {
-            switch (index) {
-                case 0:
-                    if (pas.getSurvive().equals("1")) {
-                        survived++;
-                    } else {
-                        notSurvived++;
-                    }
-                    break;
-                case 1:
-                    if (pas.getSurvive().equals("1") && pas.getSex().equals("male")) {
-                        survived++;
-                    } else if(pas.getSurvive().equals("0") && pas.getSex().equals("male")){
-                        notSurvived++;
-                    }
-                    break;
-
-                case 2:
-                    if (pas.getSurvive().equals("1") && pas.getSex().equals("female")) {
-                        survived++;
-                    } else if(pas.getSurvive().equals("0") && pas.getSex().equals("female")){
-                        notSurvived++;
-                    }
-                    break;
-            }
-        }
-        System.out.println("total: " + (survived + notSurvived) + " (survived: " + survived + ", not survived: " + notSurvived + ")");
     }
 }

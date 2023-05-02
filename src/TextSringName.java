@@ -1,4 +1,6 @@
 import javax.swing.*;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.io.File;
@@ -20,13 +22,21 @@ public class TextSringName extends JPanel {
             this.textFieldName.setBounds(survivedLabel.getX() + survivedLabel.getWidth() + 1, survivedLabel.getY(), Constants.TEXT_WIDTH, Constants.TEXT_HEIGHT);
             this.add(this.textFieldName);
 
+            this.textFieldName.getDocument().addDocumentListener(new DocumentListener() {
+                @Override
+                public void insertUpdate(DocumentEvent e) {
+                    Constants.name = textFieldName.getText();
+                }
 
-            JButton btn = new JButton("choose name");
-            btn.setBounds(x + Constants.MARGIN_FROM_LEFT, y, Constants.LABEL_WIDTH, Constants.LABEL_HEIGHT);
-            this.add(btn);
-            btn.addActionListener(e -> {
+                @Override
+                public void removeUpdate(DocumentEvent e) {
+                    Constants.name = textFieldName.getText();
+                }
 
-                rangeOfNames(textFieldName.getText());
+                @Override
+                public void changedUpdate(DocumentEvent e) {
+                    Constants.name = textFieldName.getText();
+                }
 
             });
 
@@ -42,12 +52,6 @@ public class TextSringName extends JPanel {
                 }
             });
             this.revalidate();
-        }
-    }
-
-    public void rangeOfNames(String name){
-        for (Passenger pas: Constants.passengers) {
-            if (pas.name.contains(name)) System.out.println("Passenger Id: " + pas.getPassengerId() + ", his full name: " + pas.name  );
         }
     }
 }

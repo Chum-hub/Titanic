@@ -1,4 +1,6 @@
 import javax.swing.*;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.io.File;
@@ -20,16 +22,23 @@ public class TextStringParch extends JPanel {
             this.textFieldParch.setBounds(survivedLabel.getX() + survivedLabel.getWidth() + 1, survivedLabel.getY(), Constants.TEXT_WIDTH, Constants.TEXT_HEIGHT);
             this.add(this.textFieldParch);
 
+            this.textFieldParch.getDocument().addDocumentListener(new DocumentListener() {
+                @Override
+                public void insertUpdate(DocumentEvent e) {
+                    Constants.parch = textFieldParch.getText();
+                }
 
-            JButton btn = new JButton("choose parch");
-            btn.setBounds(x + Constants.MARGIN_FROM_LEFT, y, Constants.LABEL_WIDTH, Constants.LABEL_HEIGHT);
-            this.add(btn);
-            btn.addActionListener(e -> {
+                @Override
+                public void removeUpdate(DocumentEvent e) {
+                    Constants.parch = textFieldParch.getText();
+                }
 
-                rangeOfParch(textFieldParch.getText());
+                @Override
+                public void changedUpdate(DocumentEvent e) {
+                    Constants.parch = textFieldParch.getText();
+                }
 
             });
-
             this.textFieldParch.addFocusListener(new FocusListener() {
                 @Override
                 public void focusGained(FocusEvent e) {
@@ -42,14 +51,6 @@ public class TextStringParch extends JPanel {
                 }
             });
             this.revalidate();
-        }
-    }
-
-    public void rangeOfParch(String parch){
-        int parchNum = Integer.parseInt(parch);
-        for (Passenger pas: Constants.passengers) {
-            int pasParch = Integer.parseInt(pas.parch);
-            if (pasParch == parchNum) System.out.println("Passenger Id: " + pas.getPassengerId() + ", amount of parch: " + pas.parch);
         }
     }
 }

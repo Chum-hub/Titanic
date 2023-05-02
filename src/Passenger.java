@@ -20,7 +20,7 @@ public class Passenger {
         return survive;
     }
 
-    public String getpClass() {
+    public String getPClass() {
         return pClass;
     }
 
@@ -75,6 +75,7 @@ public class Passenger {
             this.cabin = values[11];
             this.embarked = values[12];
         } catch (ArrayIndexOutOfBoundsException e) {
+            this.embarked = "no data";
             System.out.println("There is no value on point: embarked" + e.getMessage());
         }
         //System.out.println(sex);

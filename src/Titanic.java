@@ -36,9 +36,11 @@ class Titanic extends JFrame {
         this.add(new ManageScreenGender(0, 120, Constants.WINDOW_WIDTH, Constants.WINDOW_HEIGHT));
         this.add(new TextStringSib(0, 180, Constants.WINDOW_WIDTH, Constants.WINDOW_HEIGHT));
         this.add(new TextStringParch(0, 210, Constants.WINDOW_WIDTH, Constants.WINDOW_HEIGHT));
-        this.add(new TextFieldCost(0, 240, Constants.WINDOW_WIDTH, Constants.WINDOW_HEIGHT));
-
+        this.add(new TextStringTicket(0, 240, Constants.WINDOW_WIDTH, Constants.WINDOW_HEIGHT));
+        this.add(new TextFieldCost(0, 270, Constants.WINDOW_WIDTH, Constants.WINDOW_HEIGHT));
+        this.add(new TextStringCabin(0, 290, Constants.WINDOW_WIDTH, Constants.WINDOW_HEIGHT));
+        this.add(new ManageScreenEmbarked(0, 310, Constants.WINDOW_WIDTH, Constants.WINDOW_HEIGHT));
+        this.add(new Filtration(50, 340, Constants.WINDOW_WIDTH, Constants.WINDOW_HEIGHT));
         this.setVisible(true);
-
     }
 }

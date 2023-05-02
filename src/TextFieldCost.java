@@ -1,4 +1,6 @@
 import javax.swing.*;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.io.File;
@@ -23,12 +25,38 @@ public class TextFieldCost extends JPanel {
             this.maxTextField.setBounds(minTextField.getX() + survivedLabel.getX() + survivedLabel.getWidth() + 20,survivedLabel.getY(), Constants.TEXT_WIDTH, Constants.TEXT_HEIGHT);
             this.add(this.maxTextField);
 
-            JButton btn = new JButton("choose cost");
-            btn.setBounds(x + Constants.MARGIN_FROM_LEFT, y, Constants.LABEL_WIDTH, Constants.LABEL_HEIGHT);
-            this.add(btn);
-            btn.addActionListener(e->{
+            this.minTextField.getDocument().addDocumentListener(new DocumentListener() {
+                @Override
+                public void insertUpdate(DocumentEvent e) {
+                    Constants.minCost = minTextField.getText();
+                }
 
-                rangeOfCost(minTextField.getText(), maxTextField.getText());
+                @Override
+                public void removeUpdate(DocumentEvent e) {
+                    Constants.minCost = minTextField.getText();
+                }
+
+                @Override
+                public void changedUpdate(DocumentEvent e) {
+                    Constants.minCost = minTextField.getText();
+                }
+
+            });
+            this.maxTextField.getDocument().addDocumentListener(new DocumentListener() {
+                @Override
+                public void insertUpdate(DocumentEvent e) {
+                    Constants.maxCost = maxTextField.getText();
+                }
+
+                @Override
+                public void removeUpdate(DocumentEvent e) {
+                    Constants.maxCost = maxTextField.getText();
+                }
+
+                @Override
+                public void changedUpdate(DocumentEvent e) {
+                    Constants.maxCost = maxTextField.getText();
+                }
 
             });
 
@@ -56,19 +84,6 @@ public class TextFieldCost extends JPanel {
                 }
             });
             this.revalidate();
-        }
-    }
-    public void rangeOfCost(String min, String max){
-        try{
-            double minCost = Double.parseDouble(min);
-            double maxCost = Double.parseDouble(max);
-
-            for (Passenger pas: Constants.passengers) {
-                double pasCost = Double.parseDouble(pas.fare);
-                if (pasCost >= minCost && pasCost <= maxCost) System.out.println(" Here your passengers: ID-" + pas.passengerId + ", COst: " + pas.fare);
-            }
-        } catch (NumberFormatException e){
-            System.out.println("This is not a number: Error " + e.getMessage());
         }
     }
 }
